@@ -13,7 +13,7 @@ body {
 /* 클래스 선택자 예시 */
 .page-header {
   background: linear-gradient(120deg, #2563eb, #7c3aed);
-  color: #ffffff;
+  color: #f1efef;
   text-align: center;
   padding: 32px 16px;
 }
@@ -43,7 +43,9 @@ body {
   background-color: #2563eb;
   color: #ffffff;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
 }
 
 /* 가상 클래스(:hover) 예시 */
