@@ -1,19 +1,28 @@
-import { createContext, useState, useCallback, useMemo } from 'react';
+import { createContext, useContext, useState } from 'react';
 
-export const SessionContext = createContext();
+const SessionContext = createContext(null);
 
-export const SessionProvider = ({ children }) => {
-  const [totalSessions, setTotalSessions] = useState(0);
+export function SessionProvider({ children }) {
+  const [completedSessions, setCompletedSessions] = useState(0);
+  const [totalRestTime, setTotalRestTime] = useState(0);
 
-  const incrementSession = useCallback(() => {
-    setTotalSessions((prev) => prev + 1);
-  }, []);
-
-  const value = useMemo(() => ({ totalSessions, incrementSession }), [totalSessions, incrementSession]);
+  const incrementSession = () => setCompletedSessions((prev) => prev + 1);
+  const addRestTime = (minutes) => setTotalRestTime((prev) => prev + minutes);
 
   return (
-    <SessionContext.Provider value={value}>
+    <SessionContext.Provider
+      value={{
+        completedSessions,
+        totalRestTime,
+        incrementSession,
+        addRestTime,
+      }}
+    >
       {children}
     </SessionContext.Provider>
   );
-};
+}
+
+export function useSession() {
+  return useContext(SessionContext);
+}
